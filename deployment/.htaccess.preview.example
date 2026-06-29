@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Carsystem RM Preview"
+AuthUserFile /home/USERNAME/.htpasswd-carsystemrm
+Require valid-user

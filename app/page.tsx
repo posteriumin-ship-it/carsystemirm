@@ -39,7 +39,7 @@ type ParticleStyle = CSSProperties & {
 
 export default function Home() {
   return (
-    <main className="hero relative isolate grid min-h-[100svh] overflow-hidden">
+    <main className="coming-soon hero relative isolate grid min-h-[100svh] overflow-hidden">
       <div className="scene" aria-hidden="true">
         <div className="technical-grid" />
         <div className="spotlight spotlight-primary" />
