@@ -1,42 +1,18 @@
-# Static export deploy
+# Deployment
 
-Posle uspešnog build-a, sadržaj foldera `out` ide direktno u `public_html` za domen `carsystemirm.com`.
+Ovaj projekat sada ima dve jasno odvojene deployment varijante:
 
-Važno: uploaduje se sadržaj foldera `out`, ne folder `out` kao spoljašnji omotač.
+- `deployment/vercel` — primarna varijanta dok Burina.net ima samo domen/DNS.
+- `deployment/shared-hosting` — kasnija Burina/shared hosting varijanta ako se aktivira web hosting paket.
 
-## Rute
+## Trenutna preporuka
 
-- `https://carsystemirm.com/` prikazuje javnu “Sajt je u pripremi” stranicu.
-- `https://carsystemirm.com/preview/` prikazuje internu preview verziju sajta.
+Koristiti Vercel deployment.
 
-## Basic Auth za preview
+Javna ruta `/` ostaje otvorena, a sve rute koje počinju sa `/preview` štiti Next middleware preko Basic Auth-a i env varijabli.
 
-Primer fajla je:
+## Važna razlika
 
-```txt
-deployment/.htaccess.preview.example
-```
+`.htaccess` ne radi na Vercel-u.
 
-Kada želiš da zaključaš samo preview deo, ovaj primer se kasnije kopira u:
-
-```txt
-out/preview/.htaccess
-```
-
-U fajlu obavezno zameni:
-
-```apache
-/home/USERNAME/.htpasswd-carsystemrm
-```
-
-stvarnom apsolutnom putanjom na hostingu.
-
-Pravi `.htpasswd` fajl mora biti van `public_html`, na primer:
-
-```txt
-/home/USERNAME/.htpasswd-carsystemrm
-```
-
-Stvarne lozinke se ne čuvaju u repo-u, ne ubacuju se u ZIP i ne uploaduju se u `public_html`.
-
-Ako hosting panel ima opciju “Directory Privacy” ili “Password Protect Directories”, bolje je koristiti tu opciju za folder `/preview`, jer panel sam generiše ispravnu `.htaccess` i `.htpasswd` konfiguraciju.
+`.htaccess` primer iz `deployment/shared-hosting` važi samo za Apache/shared hosting okruženje, kao što je Burina web hosting paket ako se kasnije kupi ili aktivira.
